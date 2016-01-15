@@ -1,0 +1,1 @@
+Testing out React Native concepts with a simple Pomodoro timer app.
