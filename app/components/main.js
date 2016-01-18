@@ -2,6 +2,7 @@
 
 var React = require('react-native');
 var { StyleSheet, Text, View } = React;
+var Timer = require('./timer');
 
 var styles = StyleSheet.create({
   container: {
@@ -13,9 +14,9 @@ var styles = StyleSheet.create({
   },
   welcome: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 30,
     textAlign: 'center',
-    margin: 10,
+    margin: 50
   }
 });
 
@@ -23,9 +24,10 @@ class Main extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>
-	       <Text style={styles.welcome}>welcome to pomodoro</Text>
-	    </View>
-		);
+        <Text style={styles.welcome}>welcome to pomodoro</Text>
+        <Timer />
+      </View>
+    );
 	}
 };
 
