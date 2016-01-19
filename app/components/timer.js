@@ -5,6 +5,12 @@ var { StyleSheet, Text, View } = React;
 var Button = require('react-native-button');
 var TimerMixin = require('react-timer-mixin');
 
+var timerDuration = 25 * 60;
+var startTime;
+var timeLeft;
+var minutes;
+var seconds;
+
 var styles = StyleSheet.create({
   button: {
     backgroundColor: 'white',
@@ -26,7 +32,7 @@ var Timer = React.createClass({
 
   getInitialState: function() {
     return {
-      timeRemaining: 25
+      timeRemaining: '25:00'
     }
   },
 
@@ -43,15 +49,29 @@ var Timer = React.createClass({
 	},
 
   handleClick(event) {
-    this.setInterval(this.countdown, 1000);
+    this.startCountdown();
   },
 
-  countdown() {
-    if ( this.state.timeRemaining > 0 ) {
+  timer() {
+    timeLeft = timerDuration - (((Date.now() - startTime)/1000) | 0 );
+    
+    minutes = (timeLeft / 60) | 0;
+    seconds = (timeLeft % 60) | 0;
+
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+
+    if ( timeLeft > 0 ) {
       this.setState({
-        timeRemaining: this.state.timeRemaining - 1
+        timeRemaining: minutes + ':' + seconds
       });
     }
+  },
+
+  startCountdown() {
+    startTime = Date.now();
+    this.timer();
+    this.setInterval(this.timer, 1000);
   }
 });
 
